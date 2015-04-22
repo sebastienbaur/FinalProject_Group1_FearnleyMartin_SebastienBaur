@@ -1,0 +1,12 @@
+/Arbre.class
+/Directory.class
+/Fichier.class
+/InvalidVirtualDiskException.class
+/NoAvailableSpaceException.class
+/NotADirectoryException.class
+/NotAnExistingFileException.class
+/VirtualDisk$Successors.class
+/VirtualDisk.class
+/VirtualDiskGenerator.class
+/Visitable.class
+/Visitor.class
