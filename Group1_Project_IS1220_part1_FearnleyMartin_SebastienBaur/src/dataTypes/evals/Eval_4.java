@@ -21,7 +21,7 @@ public class Eval_4 {
 		//--------------------------------------------------------------------------------
 		// CREATION OF A VIRTUAL DISK VD, DISPLAY FREE SPACE AND INITIAL NODES AND EDGES, TEST OF SUBGRAPH
 		//--------------------------------------------------------------------------------
-		VirtualDisk vd = VirtualDisk.loadVirtualDisk("eval/vd1.ser");
+		VirtualDisk vd = VirtualDisk.loadVirtualDisk("virtual disks/vdlevel1.ser");
 		System.out.println("Free space: " +vd.queryFreeSpace());
 		System.out.println("List of nodes: " +vd.getTree().getNodeList());
 		System.out.println("List of edges: " +vd.getTree().getEdgeList());

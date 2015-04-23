@@ -1,26 +1,34 @@
-package dataTypes;
-import graphImplementation.*;
-
+package dataTypes.evals;
 import java.io.*;
 import java.util.*;
+
+import treeImplementation.*;
+import dataTypes.NoAvailableSpaceException;
+import dataTypes.NotADirectoryException;
+import dataTypes.NotAnExistingFileException;
+import dataTypes.VirtualDisk;
 
 
 public class Eval_2 {
 
 	/**
 	 * @param args
-	 * @throws NotInGraphException 
+	 * @throws NotInTreeException 
 	 * @throws NoAvailableSpaceException 
 	 * @throws NotADirectoryException 
+	 * @throws ParentException 
+	 * @throws ImpossibleDisplacementException 
+	 * @throws NotAnExistingFileException 
+	 * @throws AlreadyExistingComputerFileException 
 	 */
-	public static void main(String[] args) throws NotInGraphException, NoAvailableSpaceException, NotADirectoryException {
-
+	public static void main(String[] args) throws NotInTreeException, NoAvailableSpaceException, NotADirectoryException, ParentException, ImpossibleDisplacementException, NotAnExistingFileException {
 		//--------------------------------------------------------------------------------
 		// CREATION OF A VIRTUAL DISK VD1, DISPLAY FREE SPACE AND INITIAL NODES
 		//--------------------------------------------------------------------------------
-		VirtualDisk vd = VirtualDisk.createVirtualDisk("vd2", "vd2.ser",1000);
+
+		VirtualDisk vd = VirtualDisk.createVirtualDisk("vd2", "virtual disks/vd2.ser",1000);
 		System.out.println("Free space: " +vd.queryFreeSpace());
-		System.out.println("List of nodes: " +vd.getGraph().getNodeList());
+		System.out.println("List of nodes: " +vd.getTree().getNodeList());
 
 
 
@@ -35,13 +43,13 @@ public class Eval_2 {
 		}
 
 		//checking if import has worked by checking the file and folders in graph as well as the available space
-		System.out.println("List of nodes: " + vd.getGraph().getNodeList());
-		System.out.println("List of edges: " + vd.getGraph().getEdgeList());
+		System.out.println("List of nodes: " + vd.getTree().getNodeList());
+		System.out.println("List of edges: " + vd.getTree().getEdgeList());
 		System.out.println("Free space: " +vd.queryFreeSpace());
 
 		//test "getListOfPredecessors" and "contains" and "getPath"
-		System.out.println("Predecessors of test text: " +vd.getGraph().getListOfPredecessors(vd.getNodeFromPath("Home/level 1/level 2/test text.txt")));
-		System.out.println("vd contains test text: " + vd.getGraph().contains(vd.getNodeFromPath("Home/level 1/level 2/test text.txt")));
+		System.out.println("Predecessors of test text: " +vd.getTree().getListOfPredecessors(vd.getNodeFromPath("Home/level 1/level 2/test text.txt")));
+		System.out.println("vd contains test text: " + vd.getTree().contains(vd.getNodeFromPath("Home/level 1/level 2/test text.txt")));
 		System.out.println("filepath of test text: " + vd.getPath(vd.getNodeFromPath("Home/level 1/level 2/test text.txt")));
 
 
@@ -83,13 +91,16 @@ public class Eval_2 {
 		vd.saveVirtualDisk();
 
 
-		
+
 		//--------------------------------------------------------------------------------
 		// TEST OF DELETEALL()
 		//--------------------------------------------------------------------------------
-		System.out.println("Content before removing : " + vd.getGraph().getNodeList());
+		System.out.println("Content before removing : " + vd.getTree().getNodeList());
 		vd.deleteAll("Home/level 1/level 2");
-		System.out.println("Content after removing : " + vd.getGraph().getNodeList());
-	}
+		System.out.println("Content after removing : " + vd.getTree().getNodeList());
 
+
+	}
 }
+
+

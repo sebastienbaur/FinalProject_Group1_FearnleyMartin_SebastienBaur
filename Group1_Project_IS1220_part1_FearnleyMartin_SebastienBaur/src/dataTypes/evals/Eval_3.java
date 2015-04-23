@@ -30,7 +30,7 @@ public class Eval_3 {
 		//--------------------------------------------------------------------------------
 
 
-		VirtualDisk vd = VirtualDisk.createVirtualDisk("vd3", "vd3.ser",1000);
+		VirtualDisk vd = VirtualDisk.createVirtualDisk("vd3", "virtual disks/vd3.ser",1000);
 		System.out.println("Free space: " +vd.queryFreeSpace());
 		System.out.println("List of nodes: " +vd.getTree().getNodeList());
 

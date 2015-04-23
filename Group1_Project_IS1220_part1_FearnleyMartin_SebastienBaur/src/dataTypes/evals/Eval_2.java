@@ -26,7 +26,7 @@ public class Eval_2 {
 		// CREATION OF A VIRTUAL DISK VD1, DISPLAY FREE SPACE AND INITIAL NODES
 		//--------------------------------------------------------------------------------
 
-		VirtualDisk vd = VirtualDisk.createVirtualDisk("vd2", "vd2.ser",1000);
+		VirtualDisk vd = VirtualDisk.createVirtualDisk("vd2", "virtual disks/vd2.ser",1000);
 		System.out.println("Free space: " +vd.queryFreeSpace());
 		System.out.println("List of nodes: " +vd.getTree().getNodeList());
 
