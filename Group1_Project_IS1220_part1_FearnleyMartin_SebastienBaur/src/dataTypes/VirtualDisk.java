@@ -568,6 +568,8 @@ public class VirtualDisk implements Serializable, Visitor {
 
 
 
+
+
 	public long getCapacity() {
 		return capacity;
 	}
@@ -582,6 +584,10 @@ public class VirtualDisk implements Serializable, Visitor {
 
 	public String getPath() {
 		return path;
+	}
+	
+	public void setPath(String newpath){
+		this.path = newpath;
 	}
 
 	public Tree getTree() {

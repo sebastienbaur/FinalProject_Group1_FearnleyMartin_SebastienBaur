@@ -33,7 +33,7 @@ public class Directory extends treeImplementation.Node implements Serializable, 
 
 	@Override
 	public String toString() {
-		return "Directory [" +name  +", id : " + ((Node)this).id +"]";
+		return "[" +name  +", id : " + ((Node)this).id +"]";
 	}
 
 
