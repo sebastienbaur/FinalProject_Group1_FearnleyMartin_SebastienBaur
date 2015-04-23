@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.8" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
+  <class id="1" language="java" name="clients.Frame.PasteButtonListener" 
+    project="Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur" 
+    file="/Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur/src/clients/Frame.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="812" y="1534"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="clients.Frame" project="Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur" 
+    file="/Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur/src/clients/Frame.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="942" y="737"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="clients.Frame.FindButtonListener" 
+    project="Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur" 
+    file="/Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur/src/clients/Frame.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1045" y="1534"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="clients.Frame.SaveButtonListener" 
+    project="Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur" 
+    file="/Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur/src/clients/Frame.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1278" y="1534"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="clients.Frame.ExportButtonListener" 
+    project="Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur" 
+    file="/Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur/src/clients/Frame.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1511" y="1534"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="clients.Frame.CloseTabButtonListener" 
+    project="Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur" 
+    file="/Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur/src/clients/Frame.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1744" y="1534"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="clients.Frame.ImportButtonListener" 
+    project="Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur" 
+    file="/Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur/src/clients/Frame.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1977" y="1534"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="clients.Frame.RemoveFileButtonListener" 
+    project="Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur" 
+    file="/Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur/src/clients/Frame.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2210" y="1534"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="clients.Frame.TabMouseListener" 
+    project="Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur" 
+    file="/Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur/src/clients/Frame.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2443" y="1534"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="clients.Frame.CopyButtonListener" 
+    project="Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur" 
+    file="/Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur/src/clients/Frame.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2676" y="1534"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="clients.Frame.RemoveVFSButtonListener" 
+    project="Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur" 
+    file="/Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur/src/clients/Frame.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2721" y="1802"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="clients.Frame.SelectionListener" 
+    project="Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur" 
+    file="/Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur/src/clients/Frame.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2451" y="1786"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="clients.Frame.CreateVFSButtonListener" 
+    project="Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur" 
+    file="/Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur/src/clients/Frame.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="817" y="1826"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="clients.Frame.RenameVFSButtonListener" 
+    project="Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur" 
+    file="/Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur/src/clients/Frame.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1050" y="1818"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="clients.Frame.RenameButtonListener" 
+    project="Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur" 
+    file="/Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur/src/clients/Frame.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1287" y="1826"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="clients.Frame.FreeSpaceButtonListener" 
+    project="Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur" 
+    file="/Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur/src/clients/Frame.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1508" y="1822"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="clients.Frame.HelpButtonListener" 
+    project="Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur" 
+    file="/Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur/src/clients/Frame.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1741" y="1818"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="clients.Frame.LoadButtonListener" 
+    project="Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur" 
+    file="/Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur/src/clients/Frame.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1970" y="1810"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="clients.Frame.CutButtonListener" 
+    project="Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur" 
+    file="/Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur/src/clients/Frame.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2207" y="1814"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="clients.GUI" project="Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur" 
+    file="/Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur/src/clients/GUI.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1776" y="298"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="clients.CLUI" project="Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur" 
+    file="/Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur/src/clients/CLUI.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1420" y="444"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="clients.TextPrompt" 
+    project="Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur" 
+    file="/Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur/src/clients/TextPrompt.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2254" y="448"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="23" language="java" name="clients.TextPrompt.Show" 
+    project="Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur" 
+    file="/Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur/src/clients/TextPrompt.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2034" y="322"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="24" language="java" name="clients.VdcnManagement" 
+    project="Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur" 
+    file="/Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur/src/clients/VdcnManagement.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2620" y="562"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="clients.VdAndCurrentNode" 
+    project="Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur" 
+    file="/Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur/src/clients/VdAndCurrentNode.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2590" y="352"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="clients.TreeUtil" 
+    project="Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur" 
+    file="/Group1_Project_IS1220_part1_FearnleyMartin_SebastienBaur/src/clients/TreeUtil.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2968" y="320"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <nesting id="27">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="18"/>  
+  </nesting>  
+  <nesting id="28">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="19"/>  
+  </nesting>  
+  <nesting id="29">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="9"/>  
+  </nesting>  
+  <nesting id="30">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="12"/>  
+  </nesting>  
+  <nesting id="31">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="23"/>  
+  </nesting>  
+  <nesting id="32">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </nesting>  
+  <association id="33">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="34" name="vdList"/>      
+      <multiplicity id="35" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="36">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="17"/>  
+  </nesting>  
+  <nesting id="37">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="14"/>  
+  </nesting>  
+  <nesting id="38">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="3"/>  
+  </nesting>  
+  <nesting id="39">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="8"/>  
+  </nesting>  
+  <nesting id="40">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="16"/>  
+  </nesting>  
+  <nesting id="41">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="5"/>  
+  </nesting>  
+  <nesting id="42">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="7"/>  
+  </nesting>  
+  <nesting id="43">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="11"/>  
+  </nesting>  
+  <nesting id="44">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="1"/>  
+  </nesting>  
+  <nesting id="45">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="6"/>  
+  </nesting>  
+  <association id="46">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="47" name="show"/>      
+      <multiplicity id="48" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="49">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="15"/>  
+  </nesting>  
+  <nesting id="50">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="13"/>  
+  </nesting>  
+  <nesting id="51">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="10"/>  
+  </nesting>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
