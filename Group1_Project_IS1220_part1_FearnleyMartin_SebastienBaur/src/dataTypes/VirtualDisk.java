@@ -642,6 +642,11 @@ public class VirtualDisk implements Serializable, Visitor {
 		return (this.capacity - occupiedSpace);
 	}
 
+//	@Override
+//	public String toString() {
+//		return "VirtualDisk [tree=" + tree + "]";
+//	}
+
 
 
 }

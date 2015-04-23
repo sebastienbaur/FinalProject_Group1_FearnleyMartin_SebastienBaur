@@ -92,7 +92,7 @@ public class Fichier extends treeImplementation.Node implements Serializable, Vi
 
 	@Override
 	public String toString() {
-		return "[" +name  +", id : " + ((Node)this).id +"]";
+		return "Fichier [" +name  +", id : " + ((Node)this).id +"]";
 	}
 
 

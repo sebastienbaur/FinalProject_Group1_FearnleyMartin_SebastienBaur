@@ -903,6 +903,7 @@ public class Frame4 extends JFrame implements TreeSelectionListener, ActionListe
 						//						CLUI.crvfs(splitEnteredText.get(0), Integer.valueOf(splitEnteredText.get(1)));
 						//						vd = CLUI.getVdACNFromVfsname(splitEnteredText.get(0)).getVd();
 						vd = VirtualDisk.createVirtualDisk(splitEnteredText.get(0), "virtual disks/"+ splitEnteredText.get(0)+ ".ser", Integer.valueOf(splitEnteredText.get(1)));
+						htmlView.setText("Your virtual disk is saved in virtual disks/" + vd.getName() + ".ser");
 						VdAndCurrentNode vdcn = new VdAndCurrentNode(vd);
 						VdcnManagement.getVdList().add(vdcn);
 

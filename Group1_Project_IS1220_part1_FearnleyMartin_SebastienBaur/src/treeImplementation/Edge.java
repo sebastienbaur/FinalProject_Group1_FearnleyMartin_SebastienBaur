@@ -38,7 +38,7 @@ public class Edge implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Edge [" + startNode + "," + endNode + "]";
+		return "Edge [" + startNode + "," + endNode + ", id :" + id + "]";
 	}
 
 	public void setEndNode(Node endNode) {

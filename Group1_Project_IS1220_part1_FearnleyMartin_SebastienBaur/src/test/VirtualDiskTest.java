@@ -43,10 +43,10 @@ public class VirtualDiskTest {
 		File f = new File("vd.ser");
 		assertTrue(f.exists());
 	}
+	
 	//test à revoir
 	@Test
 	public void testLoadVirtualDisk() throws NotInTreeException, NotADirectoryException, ParentException, NotAnExistingFileException {
-		
 //		Recreation of eval/vd1.ser
 		VirtualDisk vd = new VirtualDisk(vdtest.getName(), vdtest.getPath(),vdtest.getCapacity());
 		vd.getTree().addNode(new Directory("Home"));
@@ -55,10 +55,10 @@ public class VirtualDiskTest {
 		} catch (NoAvailableSpaceException e) {
 			e.printStackTrace();
 		}
-		
 //		import of vd1.ser
 		VirtualDisk vd2 = vdtest;
-
+		vd.getTree().getNodeList().get(0).id=0; vd.getTree().getNodeList().get(1).id=1; vd.getTree().getNodeList().get(2).id=2; vd.getTree().getNodeList().get(3).id=3; vd.getTree().getNodeList().get(4).id=4; vd.getTree().getNodeList().get(5).id=5; 
+		vd.getTree().getEdgeList().get(0).setId(0); vd.getTree().getEdgeList().get(1).setId(1); vd.getTree().getEdgeList().get(2).setId(2); vd.getTree().getEdgeList().get(3).setId(3); vd.getTree().getEdgeList().get(4).setId(4); 
 //		to test this function, we import vd1 from disk, and we create the exact same virtual disk from java, we can then test their equality.
 		assertEquals(vd,vd2);
 	}
@@ -68,14 +68,16 @@ public class VirtualDiskTest {
           VirtualDisk vd1 = vdtest;
           vd1.deleteAll("Home/level 1/level 2");
           VirtualDisk vd2 =  new VirtualDisk(vdtest.getName(), vdtest.getPath(),vdtest.getCapacity());
-          vd2.getTree().addNode(new Directory("Home"));
-          Directory l1 = new Directory("level 1");
-          Directory l2bis = new Directory("level 2 bis");
-          Fichier f2 = new Fichier("yahoo.txt");
+          Directory d0 = new Directory("Home"); d0.id = 0;
+          vd2.getTree().addNode(d0);
+          Directory l1 = new Directory("level 1"); l1.id=1;
+          Directory l2bis = new Directory("level 2 bis"); l2bis.id = 4;
+          Fichier f2 = new Fichier("yahoo.txt"); f2.id = 5;
           f2.importFile("eval/Host/level 1/level 2 bis/yahoo.txt");
           vd2.addDirectory("Home", l1);
           vd2.addDirectory("Home/level 1", l2bis);
           vd2.addFile("Home/level 1/level 2 bis", f2);
+          vd2.getTree().getEdgeList().get(0).setId(0); vd2.getTree().getEdgeList().get(1).setId(3); vd2.getTree().getEdgeList().get(2).setId(4);
           assertTrue(vd1.equals(vd2));
     }
 
@@ -106,6 +108,12 @@ public class VirtualDiskTest {
           vd2.addFile("Home/level 1/level 2", f1);
           vd2.addDirectory("Home/level 1/level 2", d1);
           vd2.addFile("Home/level 1/level 2/hello", f);
+          
+          vd2.getTree().getNodeList().get(0).id = 0 ; vd2.getTree().getNodeList().get(1).id = 1 ; vd2.getTree().getNodeList().get(2).id = 4 ; vd2.getTree().getNodeList().get(3).id = 5 ; vd2.getTree().getNodeList().get(4).id = 2 ; vd2.getTree().getNodeList().get(5).id = 3 ; vd2.getTree().getNodeList().get(6).id = 6 ; vd2.getTree().getNodeList().get(7).id = 7 ;
+          vd2.getTree().getEdgeList().get(0).setId(0); vd2.getTree().getEdgeList().get(1).setId(3); vd2.getTree().getEdgeList().get(2).setId(4); vd2.getTree().getEdgeList().get(3).setId(1); vd2.getTree().getEdgeList().get(4).setId(2); vd2.getTree().getEdgeList().get(5).setId(5); vd2.getTree().getEdgeList().get(6).setId(6);
+          
+          System.out.println(vd1.getTree());
+          System.out.println(vd2.getTree());
           assertEquals(vd1,vd2);
     }
 
@@ -125,8 +133,11 @@ public class VirtualDiskTest {
     public void testimportFileStructure() throws NoAvailableSpaceException, NotInTreeException, NotADirectoryException, ParentException, NotAnExistingFileException {
           VirtualDisk vd1 = vdtest;
           VirtualDisk vd2 = new VirtualDisk(vdtest.getName(), vdtest.getPath(),vdtest.getCapacity());
-          vd2.getTree().addNode(new Directory("Home"));
+          Directory d0 = new Directory("Home"); d0.id = 0;
+          
+          vd2.getTree().addNode(d0);
           vd2.importFileStructure("eval/Host/level 1", "Home");
+          vd2.getTree().getEdgeList().get(0).setId(0); vd2.getTree().getEdgeList().get(1).setId(1); vd2.getTree().getEdgeList().get(2).setId(2); vd2.getTree().getEdgeList().get(3).setId(3); vd2.getTree().getEdgeList().get(4).setId(4); 
           assertEquals(vd1,vd2);
     }
 
@@ -193,8 +204,11 @@ public class VirtualDiskTest {
 	@Test
 	public void testSearchString() throws NotInTreeException {
 		List<Node> list= new ArrayList<Node>();
-		list.add(new Directory ("level 1"));
+		Directory d = new Directory("level 1");
+		((Node)d).id = 1; // it's necessary to have the same id because the equals method also test it.
+		list.add(d);
 		VirtualDisk vd2 = vdtest;
+		
 		assertEquals(list, vd2.search("level 1"));
 	}
 
@@ -202,11 +216,18 @@ public class VirtualDiskTest {
 	public void testGetAllSuccessors() throws NotInTreeException {
 		VirtualDisk vd2 = vdtest;
 		List<Node> list= new ArrayList<Node>();
-		list.add(new Directory ("level 2"));
-		list.add(new Directory ("level 2 bis"));
-		list.add(new Fichier ("yahoo.txt"));
-		list.add(new Fichier ("test text.txt"));
-		list.add(new Directory("level 1"));
+		Directory d2 = new Directory("level 2"); d2.id = 2;
+		Directory d2bis = new Directory("level 2 bis"); d2bis.id = 4;
+		Fichier f1 = new Fichier("yahoo.txt"); f1.id=5;
+		Fichier f2 = new Fichier("test text.txt"); f2.id=3;
+		Directory d1 = new Directory("level 1"); d1.id=1;
+		
+		list.add(f2);		
+		list.add(d2bis);
+		list.add(d1);
+		list.add(d2);
+		list.add(f1);
+
 		HashSet<Node> h1 = new HashSet<Node>(list);
         HashSet<Node> h2 = new HashSet<Node>(vd2.getAllSuccessors("Home/level 1"));
 		assertEquals(h1,h2);
@@ -215,7 +236,9 @@ public class VirtualDiskTest {
 	@Test
 	public void testSearchStringString() throws NotInTreeException {
 		List<Node> list= new ArrayList<Node>();
-		list.add(new Directory ("level 2"));
+		Directory d = new Directory("level 2");
+		d.id = 2;
+		list.add(d);
 		VirtualDisk vd2 = vdtest;
 		assertEquals(list, vd2.search("level 2","Home/level 1"));
 	}
