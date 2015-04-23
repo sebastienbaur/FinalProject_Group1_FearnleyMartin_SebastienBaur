@@ -45,18 +45,23 @@ public class Eval_1 {
 		//checking if import has worked by checking the file and folders in graph as well as the available space
 		System.out.println("List of nodes: " + vd.getTree().getNodeList());
 		System.out.println("List of edges: " + vd.getTree().getEdgeList());
-		System.out.println("Free space: " +vd.queryFreeSpace());
+		System.out.println("Free space: " + vd.queryFreeSpace());
 
 
 
 		//--------------------------------------------------------------------------------
 		// TEST SEARCH
 		//--------------------------------------------------------------------------------
+		System.out.println("SEARCHING test folder");
 		try{
-			System.out.println("result of search(test folder) : " + vd.search("test folder")); 
+			System.out.println("result of search(test folder) : " + vd.search("test folder"));
+			System.out.println("Found !");
 		}catch(NotInTreeException e){
 			System.out.println("file not found");
+			System.out.println("-------------------------------------");
 		}
+		System.out.println("----------------------------------------");
+		System.out.println("SEARCHING gibberish");
 		try{
 			System.out.println("result of search(gibberish) : " + vd.search("gibberish")); 
 		}catch (NotInTreeException e){
