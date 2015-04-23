@@ -205,7 +205,7 @@ public class TreeTest {
 
        
        @Test
-       public void testMove() throws ParentException, ImpossibleDeplacementException {
+       public void testMove() throws ParentException, ImpossibleDisplacementException {
              t1.addNode(d1);     t1.addNode(d2);     t1.addNode(d3);     t1.addNode(d4);       t1.addNode(d5);     t1.addNode(d6);     t1.addNode(f1);
              t1.addNode(f2);     t1.addNode(f3);     t1.addNode(f4);     t1.addNode(f5);       t1.addNode(f6);
              

@@ -19,10 +19,10 @@ public class Eval_3 {
 	 * @throws NoAvailableSpaceException 
 	 * @throws NotADirectoryException 
 	 * @throws ParentException 
-	 * @throws ImpossibleDeplacementException 
+	 * @throws ImpossibleDisplacementException 
 	 * @throws NotAnExistingFileException 
 	 */
-	public static void main(String[] args) throws NotInTreeException, NoAvailableSpaceException, NotADirectoryException, ParentException, ImpossibleDeplacementException, NotAnExistingFileException {
+	public static void main(String[] args) throws NotInTreeException, NoAvailableSpaceException, NotADirectoryException, ParentException, ImpossibleDisplacementException, NotAnExistingFileException {
 
 
 		//--------------------------------------------------------------------------------

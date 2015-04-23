@@ -1,27 +1,27 @@
 package treeImplementation;
 
-public class ImpossibleDeplacementException extends Exception {
+public class ImpossibleDisplacementException extends Exception {
 
-	public ImpossibleDeplacementException() {
+	public ImpossibleDisplacementException() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ImpossibleDeplacementException(String message) {
+	public ImpossibleDisplacementException(String message) {
 		super(message);
 		// TODO Auto-generated constructor stub
 	}
 
-	public ImpossibleDeplacementException(Throwable cause) {
+	public ImpossibleDisplacementException(Throwable cause) {
 		super(cause);
 		// TODO Auto-generated constructor stub
 	}
 
-	public ImpossibleDeplacementException(String message, Throwable cause) {
+	public ImpossibleDisplacementException(String message, Throwable cause) {
 		super(message, cause);
 		// TODO Auto-generated constructor stub
 	}
 
-	public ImpossibleDeplacementException(String message, Throwable cause,
+	public ImpossibleDisplacementException(String message, Throwable cause,
 			boolean enableSuppression, boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 		// TODO Auto-generated constructor stub

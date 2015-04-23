@@ -293,7 +293,7 @@ public class VirtualDisk implements Serializable, Visitor {
 	// -----------------------------------------------------------------------------
 
 	//Internal moving of hierarchies
-	public void move(String nodeMovedPath, String parentPath) throws NotInTreeException, NotADirectoryException, ParentException, ImpossibleDeplacementException{
+	public void move(String nodeMovedPath, String parentPath) throws NotInTreeException, NotADirectoryException, ParentException, ImpossibleDisplacementException{
 		Node n = this.getNodeFromPath(nodeMovedPath);
 		if (this.getNodeFromPath(parentPath) instanceof Directory){
 			Directory parent = (Directory) this.getNodeFromPath(parentPath);
