@@ -80,7 +80,7 @@ public class Frame4 extends JFrame implements TreeSelectionListener, ActionListe
 		this.tree = tree;
 	}
 
-	private JEditorPane commandLineWriting = new JEditorPane();
+//	private JEditorPane commandLineWriting = new JEditorPane();
 	//	protected JEditorPane htmlPane = new JEditorPane();
 	private JPanel panLeft = new JPanel();
 	//	private JPanel panUpRight = new JPanel();
@@ -185,11 +185,11 @@ public class Frame4 extends JFrame implements TreeSelectionListener, ActionListe
 		Box b = Box.createVerticalBox();
 		b.setPreferredSize(new Dimension(900,100));
 		Box lineWriting = Box.createHorizontalBox();
-		lineWriting.add(new JLabel("Write here : "));
-		lineWriting.add(commandLineWriting);
+//		lineWriting.add(new JLabel("Write here : "));
+//		lineWriting.add(commandLineWriting);
 		b.add(lineWriting);
 		Box lineReading = Box.createHorizontalBox();
-		lineReading.add(new JLabel("Read here : "));
+		lineReading.add(new JLabel("Console : "));
 		JScrollPane htmlContainer = new JScrollPane(htmlView);
 		htmlContainer.setPreferredSize(new Dimension(700,100));
 		htmlContainer.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -653,7 +653,7 @@ public class Frame4 extends JFrame implements TreeSelectionListener, ActionListe
 		public void mouseReleased(MouseEvent arg0) {
 			// TODO Auto-generated method stub
 			if (treepath != null){
-				pane.removeAll();
+//				pane.removeAll();
 				String path = TreeUtil.treePathToString(treepath);
 				try {
 					tempTree = vd.getSubTree(path);
@@ -915,6 +915,8 @@ public class Frame4 extends JFrame implements TreeSelectionListener, ActionListe
 						index = tabbedPanUpRight.indexOfTab(vdContent.getName());
 						pane = (JScrollPane)tabbedPanUpRight.getComponentAt(index);
 						tabbedPanUpRight.setSelectedIndex(index);
+						revalidate();	
+						repaint();
 					}
 					else if ( f.exists()){
 						htmlView.setText("There is already a file called " + splitEnteredText.get(0)+ " saved in the directory virtual disks, please choose another name");
@@ -973,6 +975,8 @@ public class Frame4 extends JFrame implements TreeSelectionListener, ActionListe
 				String nameVFS = tabbedPanUpRight.getTitleAt(index);
 				CLUI.rmvfs(nameVFS);
 				tabbedPanUpRight.remove(component);
+				revalidate();	
+				repaint();
 			}
 		}
 
@@ -1195,7 +1199,9 @@ public class Frame4 extends JFrame implements TreeSelectionListener, ActionListe
 						tabbedPanUpRight.addTab(vd.getName(), vdContent); // add a tab containing the JTree representing vd
 						index = tabbedPanUpRight.indexOfTab(vd.getName()); // updating of index
 						pane = (JScrollPane) tabbedPanUpRight.getComponentAt(index); // updating of pane
-						tabbedPanUpRight.setSelectedIndex(index); // selection of the tab that has just been added	
+						tabbedPanUpRight.setSelectedIndex(index); // selection of the tab that has just been added
+						revalidate();	
+						repaint();
 					}
 					catch(NotInTreeException e1){
 						e1.printStackTrace();
@@ -1271,7 +1277,7 @@ public class Frame4 extends JFrame implements TreeSelectionListener, ActionListe
 
 		@Override
 		public void mouseReleased(MouseEvent arg0) {
-			vd.set
+			vd.setPath("virtual disks/"+vd.getName()+".ser");
 			vd.saveVirtualDisk();
 			String vfsName = tabbedPanUpRight.getTitleAt(index);
 			htmlView.setText("Your virtual disk " + vfsName + " has been saved in virtual disks/" + vfsName +".ser");
@@ -1376,7 +1382,7 @@ public class Frame4 extends JFrame implements TreeSelectionListener, ActionListe
 					alreadyExistingName = true;
 			}
 			if (alreadyExistingName)
-				System.out.println("There is already a virtual disk named like this. Please choose another one");
+				htmlView.setText("There is already a virtual disk named like this. Please choose another one");
 			else{
 				try {
 					vd = CLUI.getVdACNFromVfsname(tabbedPanUpRight.getTitleAt(index)).getVd();
