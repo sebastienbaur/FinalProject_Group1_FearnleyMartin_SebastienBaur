@@ -4,6 +4,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JScrollPane;
+
+import clients.TreeUtil;
 import treeImplementation.*;
 
 public class VirtualDisk implements Serializable, Visitor {
@@ -307,20 +310,50 @@ public class VirtualDisk implements Serializable, Visitor {
 	//raises exception if there is no available space to recreate extra files
 	public void copy(String nodeToBeCopied, String parent) throws NotInTreeException, NotADirectoryException, NoAvailableSpaceException, ParentException{
 		Tree subTree = this.getSubTree(nodeToBeCopied);
-		Tree subTreeCopy = new Tree();
-		subTreeCopy.setNodeList(subTree.getNodeList());
-		subTreeCopy.setEdgeList(subTree.getEdgeList());
-		if (this.getTotalFileSize(subTreeCopy) < this.queryFreeSpace()){
-			for (Node n : subTreeCopy.getNodeList()){
-				this.getTree().addNode(n);
-			}
-			for(Edge e : subTreeCopy.getEdgeList()){
-				this.getTree().addEdge(e);
-			}
-			this.getTree().addEdge(new Edge(this.getNodeFromPath(parent),this.getNodeFromPath(nodeToBeCopied)));
+		Tree subTreeCopy = null;
+		try {
+			subTreeCopy = this.duplicateTree(subTree);
+		} catch (NotInTreeException e2) {
+			e2.printStackTrace();
 		}
+		
+		if (subTreeCopy!=null){
+			if (this.getTotalFileSize(subTreeCopy) < this.queryFreeSpace()){
+				//				        	System.out.println(tempNode.toString());
+				//				        	System.out.println(parentPath.toString());
+				for (Node n : subTreeCopy.getNodeList()){
+					this.getTree().addNode(n);
+					//								System.out.println("add: " + n.toString());
+
+				}
+				for(Edge e : subTreeCopy.getEdgeList()){
+					try {
+						this.getTree().addEdge(e);
+						//									System.out.println("add edge: " + e.toString());
+
+					} catch (ParentException e1) {
+						e1.printStackTrace();
+					} catch (NotInTreeException e1) {
+						e1.printStackTrace();
+					}
+				}
+
+				try {
+					Edge edgeToAdd = new Edge(this.getNodeFromPath(parent),subTreeCopy.getRoot());
+					this.getTree().addEdge(edgeToAdd);
+					//								System.out.println("add edge (parentPath) " + edgeToAdd.toString());
+				} catch (ParentException e1) {
+					e1.printStackTrace();
+				} catch (NotInTreeException e1) {
+					e1.printStackTrace();
+				}
+		
+			}
+			
 		else
-			throw new NoAvailableSpaceException("there is not enough space in the disk");
+			System.out.println("there is not enough space in the disk");
+		}
+	
 	}
 
 	public Node duplicateNode(Node n){

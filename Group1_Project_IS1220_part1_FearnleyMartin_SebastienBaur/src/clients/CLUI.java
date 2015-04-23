@@ -34,7 +34,7 @@ public class CLUI {
 						break;
 					} catch (NotInTreeException e) {
 						System.out.println("The current node: "+ currentNode + " is irretrievable");
-						e.printStackTrace();
+						
 					}
 
 					//prints size too
@@ -55,7 +55,7 @@ public class CLUI {
 						break;
 					} catch (NotInTreeException e) {
 						System.out.println("The current node: "+ currentNode + " is irretrievable");
-						e.printStackTrace();
+						
 					}
 
 
@@ -80,7 +80,7 @@ public class CLUI {
 						break;
 					} catch (NotInTreeException e) {
 						System.out.println("The current node: "+ currentNode + " is irretrievable");
-						e.printStackTrace();
+						
 					}
 
 					//prints size too
@@ -102,13 +102,13 @@ public class CLUI {
 						break;
 					} catch (NotInTreeException e) {
 						System.out.println("The current node: "+ currentNode + " is irretrievable");
-						e.printStackTrace();
+						
 					}
 				}
 			}
 		} catch (VirtualDiskDoesntExistException e) {
 			System.out.print("No virtual disk called '" + vfsname + "' exists");
-			e.printStackTrace();
+			
 		}
 
 	}
@@ -130,18 +130,32 @@ public class CLUI {
 		try {
 			vdcn = getVdACNFromVfsname(vfsname);
 			Node nodeSpecified;
-			try {
-				nodeSpecified = vdcn.getVd().getNodeFromPath(pathname);
-				vdcn.setCurrentNode(nodeSpecified);
-				System.out.println("The current node is " + nodeSpecified);
-			} catch (NotInTreeException e) {
-				System.out.println(pathname + " not found");
-				e.printStackTrace();
+			if (pathname.equals("..")){
+				Node parentNode = null;
+				if (!vdcn.getVd().getTree().getPredecessor(vdcn.getCurrentNode()).isEmpty()){
+					parentNode = vdcn.getVd().getTree().getPredecessor(vdcn.getCurrentNode()).get(0);
+					vdcn.setCurrentNode(parentNode);
+					System.out.println("The current node is " + vdcn.getCurrentNode());
+				}
+				else{
+					System.out.println("There is no parent node");
+				}
+				
+			}
+			else{
+				try {
+					nodeSpecified = vdcn.getVd().getNodeFromPath(pathname);
+					vdcn.setCurrentNode(nodeSpecified);
+					System.out.println("The current node is " + nodeSpecified);
+				} catch (NotInTreeException e) {
+					System.out.println(pathname + " not found");
+					
+				}
 			}
 
 		} catch (VirtualDiskDoesntExistException e) {
 			System.out.println("No virtual disk called '" + vfsname + "' exists");
-			e.printStackTrace();
+			
 		}
 
 	}
@@ -157,7 +171,7 @@ public class CLUI {
 			System.out.println("There is already a file called virtual disks/"+vfsname+".ser" + ". Are you sure you want to replace it ? (Y/N)");
 			answer = sc.nextLine();
 			if (answer.equals("Y")){
-				VirtualDisk vd = VirtualDisk.createVirtualDisk(vfsname, "Virtual Disks/"+ vfsname+ ".ser", dim);
+				VirtualDisk vd = VirtualDisk.createVirtualDisk(vfsname, "virtual disks/"+ vfsname+ ".ser", dim);
 				VdAndCurrentNode vdcn = new VdAndCurrentNode(vd);
 				VdcnManagement.getVdList().add(vdcn);
 			}
@@ -185,11 +199,11 @@ public class CLUI {
 				vdcn.getVd().rename(oldpath, newName);
 			} catch (NotInTreeException e) {
 				System.out.println(oldpath + " not found");
-				e.printStackTrace();
+				
 			}
 		} catch (VirtualDiskDoesntExistException e) {
 			System.out.println("No virtual disk called '" + vfsname + "' exists");
-			e.printStackTrace();
+			
 		}
 
 	}
@@ -219,16 +233,17 @@ public class CLUI {
 				vd.importFileStructure(hostpath, vfspath);
 				System.out.println(hostpath + " imported into "+ vfsname);
 			} catch (NoAvailableSpaceException e) {
-				e.printStackTrace();
+				System.out.println("No available space");
+				
 			} catch (NotInTreeException e) {
 				System.out.println(vfspath + " not found");
-				e.printStackTrace();
+				
 			} catch (NotADirectoryException e) {
 				System.out.println(vfspath + " is not a directory");
-				e.printStackTrace();
+				
 			} catch (ParentException e) {
 				System.out.println("parent exception: file system you are importing is corrupted");
-				e.printStackTrace();
+				
 			} catch (NotAnExistingFileException e) {
 				System.out.println("The hostpath you entered isn't the path of an existing file or directory");
 			}
@@ -249,12 +264,11 @@ public class CLUI {
 				vd.exportDirectory(hostpath, "Home");
 			} catch (NotInTreeException e) {
 				System.out.println("Home directory has been deleted, cannot export the vfs as vfs is damaged");
-				e.printStackTrace();
-			}
+				}
 			System.out.println(vfsname + " exported into "+ hostpath);
 		} catch (VirtualDiskDoesntExistException e) {
 			System.out.println(vfsname +" doesn't exist");
-			e.printStackTrace();
+			
 		}
 
 	}
@@ -267,7 +281,7 @@ public class CLUI {
 			System.out.println(vd.queryFreeSpace());
 		} catch (VirtualDiskDoesntExistException e) {
 			System.out.println(vfsname +" doesn't exist");
-			e.printStackTrace();
+			
 		}
 	}
 
@@ -280,7 +294,7 @@ public class CLUI {
 			VdcnManagement.getVdList().remove(vdcn);
 		} catch (VirtualDiskDoesntExistException e) {
 			System.out.println("No virtual disk called '" + vfsname + "' exists");
-			e.printStackTrace();
+			
 		}
 
 	}
@@ -295,11 +309,11 @@ public class CLUI {
 				vd.deleteAll(pathname);
 			} catch (NotInTreeException e) {
 				System.out.println(pathname + " not found in "+ vfsname);
-				e.printStackTrace();
+				
 			}
 		} catch (VirtualDiskDoesntExistException e) {
 			System.out.println(vfsname +" doesn't exist");
-			e.printStackTrace();
+			
 		}
 
 
@@ -328,17 +342,17 @@ public class CLUI {
 						System.out.println(vd.getPath(n));
 					} catch (NotInTreeException e) {
 						System.out.println("Cannot get the path of " +n.getName());
-						e.printStackTrace();
+						
 					}
 				}
 			} catch (NotInTreeException e) {
 				System.out.println(filename + " cannot be found in "+vfsname);
-				e.printStackTrace();
+				
 			}
 
 		} catch (VirtualDiskDoesntExistException e) {
 			System.out.println(vfsname +" doesn't exist");
-			e.printStackTrace();
+			
 		} 
 	}
 
@@ -394,10 +408,10 @@ public class CLUI {
 		case "help":
 			System.out.println("To display an \"help message\" (similar to that of unix shell terminal) which gives information about how to use the command named command-name. If help is invoked without <command-name> argument then it should display a generic help message about how to use the CLUI (e.g. general syntax of a CLUI command, list of all CLUI commands name).");
 			System.out.println("help <command-name>");
-		case "gen":
-			System.out.println("Generates a tree of the current file system");
-			System.out.println("Syntax gen <vfsname>");
-			break;
+//		case "gen":
+//			System.out.println("Generates a tree of the current file system");
+//			System.out.println("Syntax gen <vfsname>");
+//			break;
 		default: 
 			System.out.println("The "+ str + "command doesn't exist");
 		}
@@ -502,8 +516,11 @@ public class CLUI {
 				else{ls(strs[1],"",strs[2]);
 				}
 			}
-			else{
+			else if (strs.length==4){
 				ls(strs[1],strs[2],strs[3]);
+			}
+			else {
+				System.out.println("Invalid Command, refer to help to see syntax");
 			}
 			break;
 		case "crvfs":
@@ -591,21 +608,22 @@ public class CLUI {
 			else if (strs.length==2&&(strs[1] instanceof String)){help(strs[1]);}
 			else{System.out.println("Invalid command, refer to help to see syntax");}
 			break;
-			//		case "gen":
-			//			if (strs.length==2){
-			//				new GenerateTree(getVdACNFromVfsname(strs[1]).getVd());
-			//			}
-			//			else {
-			//				System.out.println("Invalid command, refer to help to see syntax");
-			//			}
-			//			break;
+//			case "gen":
+//				if (strs.length==2){
+//					new Frame();
+//				}
+//				else {
+//					System.out.println("Invalid command, refer to help to see syntax");
+//				}
+//				break;
 		default: System.out.println("Not a valid command, please type help for more information");
 		}
 	}
 
 	public static void main(String[] args) throws NotInTreeException, VirtualDiskDoesntExistException, NoAvailableSpaceException, NotADirectoryException, ParentException{
 		//create vfs1
-		crvfs("vfs1",1000);
+		
+		crvfs("vfs1",1000l);
 		//create vfs2
 		//		crvfs("vfs2",1000);
 		//		System.out.println(VdcnManagement.getVdList().get(0).getVd());
@@ -631,7 +649,7 @@ public class CLUI {
 		//		//display trees
 		//		GenerateTree gt = new GenerateTree(vfs1.getVd());
 		//		new GenerateTree(vfs2.getVd());
-		expvfs("vfs1","eval/Host/moving test");
+//		expvfs("vfs1","eval/Host/moving test");
 		System.out.println("What would you like to do ? Type help to see the commands");
 
 
