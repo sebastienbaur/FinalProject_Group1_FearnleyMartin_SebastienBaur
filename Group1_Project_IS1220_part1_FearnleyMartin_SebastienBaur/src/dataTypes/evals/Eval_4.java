@@ -26,7 +26,6 @@ public class Eval_4 {
 		System.out.println("List of nodes: " +vd.getTree().getNodeList());
 		System.out.println("List of edges: " +vd.getTree().getEdgeList());
 		System.out.println(vd.getSubTree("Home/level 1"));	
-
 	}
 
 }

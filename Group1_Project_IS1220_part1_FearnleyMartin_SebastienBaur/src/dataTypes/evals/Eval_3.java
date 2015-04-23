@@ -88,6 +88,7 @@ public class Eval_3 {
 		System.out.println(vd.getTree().getNodeList());
 
 		vd.exportFile("eval/Host/moving test/level 1/test text.txt", "Home/level 1/level 2/level 3/test text.txt");
+		System.out.println("Look at folder eval/Host/moving test/level 1/test text.txt to see whether it's been saved");
 	}
 
 
