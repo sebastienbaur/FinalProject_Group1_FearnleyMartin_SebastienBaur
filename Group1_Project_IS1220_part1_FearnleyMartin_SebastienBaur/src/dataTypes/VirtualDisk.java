@@ -308,8 +308,8 @@ public class VirtualDisk implements Serializable, Visitor {
 
 	// copying a file hierarchy from one folder to another inside the virtual disk
 	//raises exception if there is no available space to recreate extra files
-	public void copy(String nodeToBeCopied, String parent) throws NotInTreeException, NotADirectoryException, NoAvailableSpaceException, ParentException{
-		Tree subTree = this.getSubTree(nodeToBeCopied);
+	public void copy(String path, String newpath) throws NotInTreeException, NotADirectoryException, NoAvailableSpaceException, ParentException{
+		Tree subTree = this.getSubTree(path);
 		Tree subTreeCopy = null;
 		try {
 			subTreeCopy = this.duplicateTree(subTree);
@@ -319,17 +319,17 @@ public class VirtualDisk implements Serializable, Visitor {
 		
 		if (subTreeCopy!=null){
 			if (this.getTotalFileSize(subTreeCopy) < this.queryFreeSpace()){
-				//				        	System.out.println(tempNode.toString());
-				//				        	System.out.println(parentPath.toString());
+//								        	System.out.println(tempNode.toString());
+//								        	System.out.println(parentPath.toString());
 				for (Node n : subTreeCopy.getNodeList()){
 					this.getTree().addNode(n);
-					//								System.out.println("add: " + n.toString());
+													System.out.println("add: " + n.toString());
 
 				}
 				for(Edge e : subTreeCopy.getEdgeList()){
 					try {
 						this.getTree().addEdge(e);
-						//									System.out.println("add edge: " + e.toString());
+															System.out.println("add edge: " + e.toString());
 
 					} catch (ParentException e1) {
 						e1.printStackTrace();
@@ -339,7 +339,7 @@ public class VirtualDisk implements Serializable, Visitor {
 				}
 
 				try {
-					Edge edgeToAdd = new Edge(this.getNodeFromPath(parent),subTreeCopy.getRoot());
+					Edge edgeToAdd = new Edge(this.getNodeFromPath(newpath),subTreeCopy.getRoot());
 					this.getTree().addEdge(edgeToAdd);
 					//								System.out.println("add edge (parentPath) " + edgeToAdd.toString());
 				} catch (ParentException e1) {

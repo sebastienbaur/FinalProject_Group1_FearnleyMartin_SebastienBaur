@@ -123,7 +123,6 @@ public class CLUI {
 		throw new VirtualDiskDoesntExistException("No virtual disk called '" + vfsname + "' exists");
 	}
 
-	//add in the different cases
 	//navigate to directory
 	public static void cd(String vfsname, String pathname){
 		VdAndCurrentNode vdcn;
@@ -161,8 +160,6 @@ public class CLUI {
 	}
 
 	//to create a new virtual disk
-	//what if vd already exists with this name ?
-	//limit maximum size to stop user doing anything stupid
 	public static void crvfs(String vfsname, long dim) {
 		Scanner sc = new Scanner(System.in);
 		String answer = new String();
@@ -208,7 +205,7 @@ public class CLUI {
 
 	}
 
-	//doesn't work correctly !!!!!!!!!!
+	//copy
 	public static void cp(String vfsname, String sourcepath,String targetpath) throws VirtualDiskDoesntExistException, NotInTreeException, NotADirectoryException, NoAvailableSpaceException, ParentException{
 		VdAndCurrentNode vdcn= getVdACNFromVfsname(vfsname);
 		VirtualDisk vd = vdcn.getVd();
