@@ -328,7 +328,7 @@ public class Tree implements Serializable{
 	//moving a file hierarchy from one Folder to another
 	// remark : the parent shouldn't be a successor of the node
 	// ajouter une exception ?
-	public void move(Node n, Directory parent ) throws NotInTreeException, ParentException, ImpossibleDeplacementException{
+	public void move(Node n, Directory parent ) throws NotInTreeException, ParentException, ImpossibleDisplacementException{
 		if (this.getPredecessor(n).size() != 0 && !this.getAllSuccessors(n).contains(parent)){
 			Node prec = this.getPredecessor(n).get(0);
 			Edge edgeToDelete = getEdgeFromNodes(prec,n);
@@ -339,7 +339,7 @@ public class Tree implements Serializable{
 		else if (this.getPredecessor(n).size() == 0 && !this.getAllSuccessors(n).contains(parent))
 			this.addEdge(new Edge(parent,n));
 		else
-			throw new ImpossibleDeplacementException();
+			throw new ImpossibleDisplacementException();
 	}
 
 

@@ -11,7 +11,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import treeImplementation.ImpossibleDeplacementException;
+import treeImplementation.ImpossibleDisplacementException;
 import treeImplementation.Node;
 import treeImplementation.NotInTreeException;
 import treeImplementation.ParentException;
@@ -161,7 +161,7 @@ public class VirtualDiskTest {
 
 
 	@Test
-	public void testMove() throws NotADirectoryException, NotInTreeException, NoAvailableSpaceException, ParentException, ImpossibleDeplacementException {
+	public void testMove() throws NotADirectoryException, NotInTreeException, NoAvailableSpaceException, ParentException, ImpossibleDisplacementException {
 		VirtualDisk vd1 = vdtest;
 		VirtualDisk vd2 = vdtest;
 		Fichier f = new Fichier("test");
