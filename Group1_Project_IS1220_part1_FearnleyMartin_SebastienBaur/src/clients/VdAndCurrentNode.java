@@ -1,4 +1,4 @@
-package Clients;
+package clients;
 
 import treeImplementation.Node;
 import treeImplementation.NotInTreeException;

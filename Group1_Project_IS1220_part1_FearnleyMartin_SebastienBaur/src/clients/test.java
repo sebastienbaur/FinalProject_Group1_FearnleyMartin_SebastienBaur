@@ -1,4 +1,4 @@
-package Clients;
+package clients;
 
 import java.awt.event.MouseEvent;
 import java.io.File;

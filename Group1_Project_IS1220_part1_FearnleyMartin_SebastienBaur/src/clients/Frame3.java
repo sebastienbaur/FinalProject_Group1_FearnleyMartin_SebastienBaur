@@ -1,4 +1,4 @@
-package Clients;
+package clients;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -11,6 +11,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -45,13 +46,14 @@ import dataTypes.NotADirectoryException;
 import dataTypes.NotAnExistingFileException;
 import dataTypes.VirtualDisk;
 
-public class Frame extends JFrame implements TreeSelectionListener, ActionListener, MouseListener, KeyListener{
+public class Frame3 extends JFrame implements TreeSelectionListener, ActionListener, MouseListener, KeyListener{
 
 	//	CLUI.crvfs("vfsGUItest",1000);
 
 	//	VirtualDisk vd = VirtualDisk.loadVirtualDisk("virtual disks/vdlevel1.ser");
 	//	VdAndCurrentNode vdcn = new VdAndCurrentNode(vd);
 
+	
 
 
 	protected VirtualDisk vd;
@@ -60,7 +62,7 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 	protected Tree tempTree=null;
 	protected Node tempNode=null;
 	protected int index;
-	protected JPanel pane;
+	protected JScrollPane pane;
 
 	public VirtualDisk getVd() {
 		return vd;
@@ -78,7 +80,6 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 		this.tree = tree;
 	}
 
-	private JTextField commandLinePrinting = new JTextField(20);
 	private JEditorPane commandLineWriting = new JEditorPane();
 	//	protected JEditorPane htmlPane = new JEditorPane();
 	private JPanel panLeft = new JPanel();
@@ -110,9 +111,11 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 	private JButton buttonCut = new JButton("Cut");
 	private JButton buttonLoad = new JButton("Load");
 	private JButton buttonFreeSpace = new JButton("Query Free Space");
+	private JButton buttonSave = new JButton("Save");
+	private JButton buttonCloseTab = new JButton("Close tab without saving");
 
 
-	public Frame() throws NotInTreeException{
+	public Frame3() throws NotInTreeException{
 		this.setResizable(false);
 		this.setSize(1000, 500);
 		JFrame frame = new JFrame();
@@ -131,7 +134,7 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 		this.getContentPane().add(tabbedPanUpRight, BorderLayout.CENTER);
 		this.getContentPane().add(panDownRight, BorderLayout.SOUTH);
 
-		panLeft.setLayout(new GridLayout(13,2));
+		panLeft.setLayout(new GridLayout(15,2));
 
 		panLeft.add(buttonRename);
 		panLeft.add(renameTextField);
@@ -145,6 +148,8 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 		panLeft.add(findTextField);
 		panLeft.add(buttonLoad);
 		panLeft.add(loadTextField);
+		panLeft.add(buttonSave);
+		panLeft.add(new JPanel());
 		panLeft.add(buttonCopy);
 		panLeft.add(new JPanel());
 		panLeft.add(buttonCut);
@@ -159,6 +164,7 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 		panLeft.add(new JPanel());
 		panLeft.add(buttonHelp);
 		panLeft.add(helpTextField);
+		panLeft.add(buttonCloseTab);
 
 		TextPrompt renametp = new TextPrompt("<new name>",renameTextField);
 		TextPrompt createvfstp = new TextPrompt("<vfsname> <size>",createVFSTextField);
@@ -202,6 +208,8 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 		buttonCut.addMouseListener(new CutButtonListener());
 		buttonLoad.addMouseListener(new LoadButtonListener());
 		buttonFreeSpace.addMouseListener(new FreeSpaceButtonListener());
+		buttonSave.addMouseListener(new SaveButtonListener());
+		buttonCloseTab.addMouseListener(new CloseTabButtonListener());
 
 		//		VdAndCurrentNode vdcn = new VdAndCurrentNode(vd);
 		//		VdcnManagement.getVdList().add(vdcn);
@@ -285,6 +293,30 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
 			String filename = findTextField.getText();
 			if (VdcnManagement.vdList.isEmpty()){
 				htmlView.setText("There is no virtual disk to search in");
@@ -316,6 +348,16 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 			}
 		}
 
+	}
+
+	class HelpButtonListener implements MouseListener{
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			
+		}
+
+
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			// TODO Auto-generated method stub
@@ -337,15 +379,6 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 		@Override
 		public void mouseReleased(MouseEvent e) {
 			// TODO Auto-generated method stub
-
-		}
-
-	}
-
-	class HelpButtonListener implements MouseListener{
-
-		@Override
-		public void mouseClicked(MouseEvent e) {
 			String str = new String();
 			String calledFunction = helpTextField.getText().toLowerCase();
 			switch (calledFunction){
@@ -353,6 +386,8 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 				str +="To create a new VFS with name vfsname and maximal dimension dim bytes\n " ;
 				str +="Syntax: <vfsname> <capacity>\n " ;
 				break;
+			case "close tab without saving" :
+				str+="Close the selected tab without saving the current state of the virtual disk \n";
 			case "rename":
 				str +="To change the name of a file/directory which is currently selected.\n " ;
 				str +="Syntax: <vfsNewName>\n " ;
@@ -361,6 +396,8 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 			case "load" :
 				str+= "allows you to load a virtual disk the computerpath (absolute or relative) of which is written in the text field next to it \n";
 				str +="Syntax : <computerpath> \n";
+			case "save" : 
+				str+= "allows you to save the state of your virtual disk in your computer, at the path its currently lies  \n";
 			case "copy":
 				str +="To copy, within the VFS named vfsname, the content of a file/directory which is currently selected.\n " ;
 				str +="<targetpath>\n " ;
@@ -417,42 +454,13 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 			htmlView.setText(str);
 		}
 
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
 	}
 
 	class ExportButtonListener implements MouseListener{
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			String hostpath = exportVFSTextField.getText();
-			if (!hostpath.equals("")&& hostpath!=null){
-				CLUI.expvfs(vd.getName(), hostpath);
-			}
-
+			
 		}
 
 		@Override
@@ -476,6 +484,11 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 		@Override
 		public void mouseReleased(MouseEvent e) {
 			// TODO Auto-generated method stub
+			String hostpath = exportVFSTextField.getText();
+			if (!hostpath.equals("")&& hostpath!=null){
+				CLUI.expvfs(vd.getName(), hostpath);
+				htmlView.setText(vd.getName() + " exported into " + exportVFSTextField.getText());
+			}
 
 		}
 
@@ -510,14 +523,27 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 		public void mouseReleased(MouseEvent e) {
 			// TODO Auto-generated method stub
 			if (treepath != null){
-				//				JPanel pane = (JPanel)tabbedPanUpRight.getComponentAt(index);
+				//				JScrollPane pane = (JScrollPane)tabbedPanUpRight.getComponentAt(index);
 
-				pane.removeAll();
-				String parent = TreeUtil.treePathToString(treepath);	
-				String hostpath = importFileStructureTextField.getText();
+
 
 				try {
+					pane.removeAll();
+					String parent = TreeUtil.treePathToString(treepath);	
+					String hostpath = importFileStructureTextField.getText();
+					int i = index;
+					tabbedPanUpRight.remove(i);
 					vd.importFileStructure(hostpath, parent);
+					CLUI.getVdACNFromVfsname(vd.getName()).setVd(vd); 
+					tree = TreeUtil.buildTreeFromVd(vd);
+					tree.addTreeSelectionListener(new SelectionListener());
+					pane = new JScrollPane(tree);
+					pane.setName(vd.getName());
+					tabbedPanUpRight.add(pane, i);
+					tabbedPanUpRight.setSelectedIndex(i);
+					index = i;
+					revalidate();	
+					repaint();
 				} catch (NoAvailableSpaceException e2) {
 					htmlView.setText("there isn't enough space left on your virtual disk");
 				} catch (NotInTreeException e2) {
@@ -528,22 +554,11 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 					e2.printStackTrace();
 				} catch (NotAnExistingFileException e2) {
 					htmlView.setText("the entered hostpath isn't a valid file");
-				}
-
-				try {
-					tree = TreeUtil.buildTreeFromVd(vd);
-				} catch (NotInTreeException e1) {
+				} catch (VirtualDiskDoesntExistException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}
+				}				
 
-
-
-				pane.add(tree);
-
-				tree.addTreeSelectionListener(new SelectionListener());
-				revalidate();	
-				repaint();
 			}
 			else{
 				htmlView.setText("No file/directory selected");
@@ -557,22 +572,7 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			if (treepath != null){
-				String path = TreeUtil.treePathToString(treepath);
-				try {
-					tempTree = vd.getSubTree(path);
-					tempNode = vd.getNodeFromPath(path);
-					commandLinePrinting.setText(path + " has been copied");
-				} catch (NotInTreeException e1) {
-					htmlView.setText("path doesn't exist");
-					e1.printStackTrace();
-				}
 			}
-			else{
-				htmlView.setText("No file/directory selected");
-			}
-
-		}
 
 
 
@@ -597,7 +597,20 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 		@Override
 		public void mouseReleased(MouseEvent e) {
 			// TODO Auto-generated method stub
-
+			if (treepath != null){
+				String path = TreeUtil.treePathToString(treepath);
+				try {
+					tempTree = vd.getSubTree(path);
+					tempNode = vd.getNodeFromPath(path);
+					htmlView.setText(path + " has been copied");
+				} catch (NotInTreeException e1) {
+					htmlView.setText("path doesn't exist");
+					e1.printStackTrace();
+				}
+			}
+			else{
+				htmlView.setText("No file/directory selected");
+			}
 		}
 
 	}
@@ -606,32 +619,7 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			if (treepath != null){
-				pane.removeAll();
-				String path = TreeUtil.treePathToString(treepath);
-				try {
-					tempTree = vd.getSubTree(path);
-					//                              tempTree = vd.duplicateTree(vd.getSubTree(path));
-					//					System.out.println(tempTree.toString());
-					tempNode = vd.getNodeFromPath(path);
-					commandLinePrinting.setText(path + " has been cut");
-					CLUI.rm(vd.getName(),path);
-					//					System.out.println(tempTree.toString());
-					try {
-						tree = TreeUtil.buildTreeFromVd(vd);
-					} catch (NotInTreeException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					pane.add(tree);
-					tree.addTreeSelectionListener(new SelectionListener());
-					revalidate();
-					repaint();
-				} catch (NotInTreeException e1) {
-					htmlView.setText("path doesn't exist");
-					e1.printStackTrace();
-				}
-			}
+			
 		}
 
 
@@ -656,7 +644,44 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 		@Override
 		public void mouseReleased(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-
+			if (treepath != null){
+				pane.removeAll();
+				String path = TreeUtil.treePathToString(treepath);
+				try {
+					tempTree = vd.getSubTree(path);
+					//                              tempTree = vd.duplicateTree(vd.getSubTree(path));
+					//					System.out.println(tempTree.toString());
+					tempNode = vd.getNodeFromPath(path);
+					htmlView.setText(path + " has been cut");
+//					CLUI.rm(vd.getName(),path);
+					vd.deleteAll(path);
+					System.out.println(tempTree.toString());
+					try {
+						//						tree = TreeUtil.buildTreeFromVd(vd);
+						int i = index;
+						tabbedPanUpRight.remove(i);
+						tree = TreeUtil.buildTreeFromVd(vd);
+						tree.addTreeSelectionListener(new SelectionListener());
+						pane = new JScrollPane(tree);
+						pane.setName(vd.getName());
+						tabbedPanUpRight.add(pane, i);
+						tabbedPanUpRight.setSelectedIndex(i);
+						index = i;
+						revalidate();	
+						repaint();
+					} catch (NotInTreeException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					//					pane.add(tree);
+					//					tree.addTreeSelectionListener(new SelectionListener());
+					//					revalidate();
+					//					repaint();
+				} catch (NotInTreeException e1) {
+					htmlView.setText("path doesn't exist");
+					e1.printStackTrace();
+				}
+			}
 		}
 
 	}
@@ -665,21 +690,44 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mouseExited(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mousePressed(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent arg0) {
+			// TODO Auto-generated method stub
 			if (treepath != null){
-				String parent = TreeUtil.treePathToString(treepath);
+				String parentPath = TreeUtil.treePathToString(treepath);
 				if (tempTree!=null && tempNode!=null){
 					Tree subTreeCopy = null;
 					try {
 						subTreeCopy = vd.duplicateTree(tempTree);
 					} catch (NotInTreeException e2) {
-						// TODO Auto-generated catch block
 						e2.printStackTrace();
 					}
 
 					if (subTreeCopy!=null){
 						if (vd.getTotalFileSize(subTreeCopy) < vd.queryFreeSpace()){
 							//				        	System.out.println(tempNode.toString());
-							//				        	System.out.println(parent.toString());
+							//				        	System.out.println(parentPath.toString());
 
 							pane.removeAll();    
 
@@ -702,19 +750,28 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 							}
 
 							try {
-								Edge edgeToAdd = new Edge(vd.getNodeFromPath(parent),subTreeCopy.getRoot());
+								Edge edgeToAdd = new Edge(vd.getNodeFromPath(parentPath),subTreeCopy.getRoot());
 								vd.getTree().addEdge(edgeToAdd);
-								//								System.out.println("add edge (parent) " + edgeToAdd.toString());
+								//								System.out.println("add edge (parentPath) " + edgeToAdd.toString());
 							} catch (ParentException e1) {
-								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							} catch (NotInTreeException e1) {
-								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
 
 							try {
+								//								tree = TreeUtil.buildTreeFromVd(vd);
+								int i = index;
+								tabbedPanUpRight.remove(i);
 								tree = TreeUtil.buildTreeFromVd(vd);
+								tree.addTreeSelectionListener(new SelectionListener());
+								pane = new JScrollPane(tree);
+								pane.setName(vd.getName());
+								tabbedPanUpRight.add(pane, i);
+								tabbedPanUpRight.setSelectedIndex(i);
+								index = i;
+								revalidate();	
+								repaint();
 								//								System.out.println("ok");
 							} catch (NotInTreeException e1) {
 								// TODO Auto-generated catch block
@@ -723,42 +780,18 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 							//							CLUI.ls(vd.getName(), "", "");
 							//							System.out.println(vd.getTree().getNodeList().toString());
 							//							System.out.println(vd.getTree().getEdgeList().toString());
-							pane.add(tree);
-							tree.addTreeSelectionListener(new SelectionListener());
-							revalidate();
-							repaint();   
+							//							pane.add(tree);
+							//							tree.addTreeSelectionListener(new SelectionListener());
+							//							revalidate();
+							//							repaint();   
 						}
-						else{commandLinePrinting.setText("error while copying");}
+						else{htmlView.setText("error while copying");}
 					}
-					else {commandLinePrinting.setText("Not enough available space in virtual disk");}
+					else {htmlView.setText("Not enough available space in virtual disk");}
 				}
-				else{commandLinePrinting.setText("Please copy something first");}
+				else{htmlView.setText("Please copy something first");}
 			}
-			else{commandLinePrinting.setText("Please select a place to copy to on the tree");}
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseExited(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mousePressed(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-
+			else{htmlView.setText("Please select a place to copy to on the tree");}
 		}
 
 	}
@@ -768,24 +801,6 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
-			if (VdcnManagement.vdList.isEmpty()){
-				htmlView.setText("There is still not any opened virtual disk. Please use the create VFS or the Load button to add one");
-			}
-			else{
-				int index = tabbedPanUpRight.getSelectedIndex();
-				pane = (JPanel)tabbedPanUpRight.getComponentAt(index);
-				String nameVFS = tabbedPanUpRight.getTitleAt(index);
-				try {
-					vd = CLUI.getVdACNFromVfsname(nameVFS).getVd();
-					tree = TreeUtil.buildTreeFromVd(vd);
-				} catch (VirtualDiskDoesntExistException e1) {
-					e1.printStackTrace();
-				} catch (NotInTreeException e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
-				}
-			}
-
 
 		}
 
@@ -810,6 +825,23 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 		@Override
 		public void mouseReleased(MouseEvent e) {
 			// TODO Auto-generated method stub
+			if (VdcnManagement.vdList.isEmpty() || tabbedPanUpRight.getTabCount() == 0){
+				htmlView.setText("There is still not any opened virtual disk. Please use the create VFS or the Load button to add one");
+			}
+			else{
+				int index = tabbedPanUpRight.getSelectedIndex();
+				pane = (JScrollPane)tabbedPanUpRight.getComponentAt(index);
+				String nameVFS = tabbedPanUpRight.getTitleAt(index);
+				try {
+					vd = CLUI.getVdACNFromVfsname(nameVFS).getVd();
+					tree = TreeUtil.buildTreeFromVd(vd);
+				} catch (VirtualDiskDoesntExistException e1) {
+					e1.printStackTrace();
+				} catch (NotInTreeException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+			}
 
 		}
 
@@ -852,49 +884,46 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 			}
 			else{
 				try{
-					CLUI.crvfs(splitEnteredText.get(0), Integer.valueOf(splitEnteredText.get(1)));
-					vd = CLUI.getVdACNFromVfsname(splitEnteredText.get(0)).getVd();
-					JPanel vdContent = new JPanel();
-					vdContent.setName(splitEnteredText.get(0));
+					boolean alreadyExistingName = false;
+					File f = new File("virtual disks/"+splitEnteredText.get(0)+".ser");
+					for (int k = 0; k < tabbedPanUpRight.getTabCount(); k++)
+					{
+						if (tabbedPanUpRight.getTitleAt(k).equals(splitEnteredText.get(0)))
+							alreadyExistingName = true;
+					}
+					if (!alreadyExistingName){
+						//						CLUI.crvfs(splitEnteredText.get(0), Integer.valueOf(splitEnteredText.get(1)));
+						//						vd = CLUI.getVdACNFromVfsname(splitEnteredText.get(0)).getVd();
+						vd = VirtualDisk.createVirtualDisk(splitEnteredText.get(0), "virtual disks/"+ splitEnteredText.get(0)+ ".ser", Integer.valueOf(splitEnteredText.get(1)));
+						VdAndCurrentNode vdcn = new VdAndCurrentNode(vd);
+						VdcnManagement.getVdList().add(vdcn);
 
-					try {
+						JScrollPane vdContent;
+						tree = TreeUtil.buildTreeFromVd(vd);
+						vdContent= new JScrollPane(tree);
+						tree.addTreeSelectionListener(new SelectionListener());
+						vdContent.setName(splitEnteredText.get(0));
 						tabbedPanUpRight.addTab(vd.getName(), vdContent);
 						index = tabbedPanUpRight.indexOfTab(vdContent.getName());
-						pane = (JPanel)tabbedPanUpRight.getComponentAt(index);
+						pane = (JScrollPane)tabbedPanUpRight.getComponentAt(index);
 						tabbedPanUpRight.setSelectedIndex(index);
-						tree = TreeUtil.buildTreeFromVd(vd);
-						vdContent.add(tree);
-						tree.addTreeSelectionListener(new SelectionListener());
-					} catch (NotInTreeException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
 					}
-				}
-				catch(NumberFormatException i){
-					htmlView.setText("Error : The second argument must be the capacity of the Virtual Disk, of type int");
-				} catch (VirtualDiskDoesntExistException e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
+					else if ( f.exists()){
+						htmlView.setText("There is already a file called " + splitEnteredText.get(0)+ " saved in the directory virtual disks, please choose another name");
+					}
+					else{
+						htmlView.setText("there is already a VFS called " + splitEnteredText.get(0) + ", please choose another name");
+					}
+
+				} catch(NumberFormatException i){
+					htmlView.setText("Error : The second argument must be the capacity of the Virtual Disk, of type long");}
+				//				 catch (VirtualDiskDoesntExistException e2) { // it can't happen since getVdACNFromVfsname will always work : a virtual disk's been created with this name
+				//					e2.printStackTrace();}
+				catch (NotInTreeException e1) {
+					e1.printStackTrace();
 				}
 			}
 
-
-			//				VdAndCurrentNode vdcn = new VdAndCurrentNode(vd);
-			//				VdcnManagement.getVdList().add(vdcn);
-			//				int index = tabbedPanUpRight.getSelectedIndex();
-			//				try {
-			//					vd = CLUI.getVdACNFromVfsname(tabbedPanUpRight.getTitleAt(index)).getVd();
-			//				} catch (VirtualDiskDoesntExistException e1) {
-			//					e1.printStackTrace();
-			//				}
-			//				try {
-			//					tree = TreeUtil.buildTreeFromVd(vd);
-			//				} catch (NotInTreeException e1) {
-			//					e1.printStackTrace();
-			//				}
-			//				panUpRight.add(tree);
-			//				tabbedPanUpRight.addTab(vd.getName(),panUpRight);
-			//				tree.addTreeSelectionListener(new SelectionListener());
 
 		}
 
@@ -935,16 +964,6 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 				Component component = tabbedPanUpRight.getSelectedComponent();
 				String nameVFS = tabbedPanUpRight.getTitleAt(index);
 				CLUI.rmvfs(nameVFS);
-				//			VirtualDisk searchedVD = new VirtualDisk();
-				//			for (VdAndCurrentNode vdACN : VdcnManagement.vdList)
-				//			{
-				//				VirtualDisk vd = vdACN.getVd();
-				//				if (vd.getName().equals(name)){
-				//					searchedVD = vd;
-				//					break;
-				//				}
-				//			}
-				//			VdcnManagement.vdList.remove(searchedVD);
 				tabbedPanUpRight.remove(component);
 			}
 		}
@@ -957,93 +976,100 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
-			if (treepath != null){
-				pane.removeAll();
-				String oldPath = TreeUtil.treePathToString(treepath);	
+			
+		}
 
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			if (treepath != null){
+				//				pane.removeAll();
+				String oldPath = TreeUtil.treePathToString(treepath);	
 				CLUI.rm(vd.getName(), oldPath);
 				try {
+					int i = index;
+					tabbedPanUpRight.remove(i);
 					tree = TreeUtil.buildTreeFromVd(vd);
+					tree.addTreeSelectionListener(new SelectionListener());
+					pane = new JScrollPane(tree);
+					pane.setName(vd.getName());
+					tabbedPanUpRight.add(pane, i);
+					tabbedPanUpRight.setSelectedIndex(i);
+					index = i;
+					revalidate();	
+					repaint();
 				} catch (NotInTreeException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				pane.add(tree);
-				tree.addTreeSelectionListener(new SelectionListener());
-				revalidate();
-				repaint();
+				//				pane.add(tree);
+				//				tree.addTreeSelectionListener(new SelectionListener());
+				//				revalidate();
+				//				repaint();
 			}
 			else{
 				htmlView.setText("No file/directory selected");
 			}
 		}
 
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
 	}
 
-	class MoveButtonListener implements MouseListener{
-
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-	}
+//	class MoveButtonListener implements MouseListener{
+//
+//		@Override
+//		public void mouseClicked(MouseEvent e) {
+//			// TODO Auto-generated method stub
+//
+//		}
+//
+//		@Override
+//		public void mouseEntered(MouseEvent e) {
+//			// TODO Auto-generated method stub
+//
+//		}
+//
+//		@Override
+//		public void mouseExited(MouseEvent e) {
+//			// TODO Auto-generated method stub
+//
+//		}
+//
+//		@Override
+//		public void mousePressed(MouseEvent e) {
+//			// TODO Auto-generated method stub
+//
+//		}
+//
+//		@Override
+//		public void mouseReleased(MouseEvent e) {
+//			// TODO Auto-generated method stub
+//
+//		}
+//
+//	}
 
 	class RenameButtonListener implements MouseListener{
 
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-
+			
 		}
 
 		@Override
@@ -1060,35 +1086,43 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 
 		@Override
 		public void mousePressed(MouseEvent arg0) {
-			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent arg0) {
 			if (treepath != null){
 				if ((!renameTextField.getText().equals("")) && (renameTextField.getText()!=null)){
-					pane.removeAll();
+					//					pane.removeAll();
 					String oldPath = TreeUtil.treePathToString(treepath);	
 					String newPath = renameTextField.getText();
 					CLUI.mv(vd.getName(), oldPath, newPath);
 					try {
+						int i = index;
+						tabbedPanUpRight.remove(i);
 						tree = TreeUtil.buildTreeFromVd(vd);
+						tree.addTreeSelectionListener(new SelectionListener());
+						pane = new JScrollPane(tree);
+						pane.setName(vd.getName());
+						tabbedPanUpRight.add(pane, i);
+						tabbedPanUpRight.setSelectedIndex(i);
+						index = i;
+						revalidate();	
+						repaint();
 					} catch (NotInTreeException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					pane.add(tree);
-					tree.addTreeSelectionListener(new SelectionListener());
-					revalidate();
-					repaint();
+					//					pane.add(tree);
+					//					tree.addTreeSelectionListener(new SelectionListener());
+					//					revalidate();
+					//					repaint();
 				}
 				else {htmlView.setText("Please enter a new name for the file/directory");}
 			}
 			else{
 				htmlView.setText("No file/directory selected");
 			}
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-
 		}
 
 	}
@@ -1106,27 +1140,7 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
-			String enteredPath = loadTextField.getText();
-			if (enteredPath.equals(null) || enteredPath.equals(""))
-				htmlView.setText("please enter a valid path");
-			else{
-				vd = VirtualDisk.loadVirtualDisk(enteredPath);
-				VdAndCurrentNode vdcn = new VdAndCurrentNode(vd); // the virtual disk vd should also be added to the list of virtual disks already opened
-				VdcnManagement.vdList.add(vdcn);
-				JPanel vdContent = new JPanel(); // creation of a pane that will contain the loaded virtual disk vd
-				try{
-					tabbedPanUpRight.addTab(vd.getName(), vdContent); // add a tab containing the JTree representing vd
-					index = tabbedPanUpRight.indexOfTab(vd.getName()); // updating of index
-					pane = (JPanel) tabbedPanUpRight.getComponentAt(index); // updating of pane
-					tabbedPanUpRight.setSelectedIndex(index); // selection of the tab that has just been added
-					tree = TreeUtil.buildTreeFromVd(vd); // creation of the tree from vd, which has just been loaded
-					vdContent.add(tree); // adding of the newly created tree to vdContent, which is contained in the new tab of tabbedPanUpRight
-					tree.addTreeSelectionListener(new SelectionListener()); // adding of a mouse listener, such as clicking on the tree causes an action of the program
-				}
-				catch(NotInTreeException e1){
-					e1.printStackTrace();
-				}
-			}
+			
 		}
 
 		@Override
@@ -1149,8 +1163,40 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 
 		@Override
 		public void mouseReleased(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-
+			String enteredPath = loadTextField.getText();
+			File enteredFile = new File(enteredPath);
+			if (enteredPath.equals(null) || enteredPath.equals("") || !enteredFile.exists())
+				htmlView.setText("please enter a valid path");
+			else{
+				boolean alreadyExistingName = false;
+				VirtualDisk vd1 = VirtualDisk.loadVirtualDisk(enteredPath);
+				for (int k = 0; k < tabbedPanUpRight.getTabCount(); k++)
+				{
+					if (tabbedPanUpRight.getTitleAt(k).equals(vd1.getName()))
+						alreadyExistingName = true;
+				}
+				if (!alreadyExistingName){
+					vd = VirtualDisk.loadVirtualDisk(enteredPath);
+					VdAndCurrentNode vdcn = new VdAndCurrentNode(vd); // the virtual disk vd should also be added to the list of virtual disks already opened
+					VdcnManagement.vdList.add(vdcn);
+					JScrollPane vdContent; // creation of a pane that will contain the loaded virtual disk vd
+					try{
+						tree = TreeUtil.buildTreeFromVd(vd); // creation of the tree from vd, which has just been loaded
+						vdContent = new JScrollPane(tree); // adding of the newly created tree to vdContent, which is contained in the new tab of tabbedPanUpRight
+						tree.addTreeSelectionListener(new SelectionListener()); // adding of a mouse listener, such as clicking on the tree causes an action of the program
+						tabbedPanUpRight.addTab(vd.getName(), vdContent); // add a tab containing the JTree representing vd
+						index = tabbedPanUpRight.indexOfTab(vd.getName()); // updating of index
+						pane = (JScrollPane) tabbedPanUpRight.getComponentAt(index); // updating of pane
+						tabbedPanUpRight.setSelectedIndex(index); // selection of the tab that has just been added	
+					}
+					catch(NotInTreeException e1){
+						e1.printStackTrace();
+					}
+				}
+				else{
+					htmlView.setText("There is already a VFS called " + vd1.getName() +", please choose another name.");
+				}
+			}
 		}
 
 	}
@@ -1159,9 +1205,7 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
-			try {
-				htmlView.setText(String.valueOf(vd.queryFreeSpace()));
-			} catch (NullPointerException e2){}
+
 		}
 
 		@Override
@@ -1184,10 +1228,107 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 
 		@Override
 		public void mouseReleased(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-
+			try {
+				htmlView.setText(String.valueOf(vd.queryFreeSpace()));
+			} catch (NullPointerException e2){}
 		}
 
 	}
 
+
+	public class SaveButtonListener implements MouseListener {
+
+		@Override
+		public void mouseClicked(MouseEvent arg0) {
+
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mouseExited(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mousePressed(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent arg0) {
+			vd.saveVirtualDisk();
+			String vfsName = tabbedPanUpRight.getTitleAt(index);
+			htmlView.setText("Your virtual disk " + vfsName + " has been saved in virtual disks/" + vfsName +".ser");
+		}
+
+	}
+
+	
+	public class CloseTabButtonListener implements MouseListener {
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			if (tabbedPanUpRight.getTabCount() == 0){
+				htmlView.setText("There is no tab to be closed.");
+			}
+			else if (tabbedPanUpRight.getTabCount() == 1){
+				int i = index;
+				tabbedPanUpRight.remove(i);
+				revalidate();	
+				repaint();
+			}
+			else{
+				int i = index;
+				tabbedPanUpRight.remove(i);
+				tabbedPanUpRight.setSelectedIndex(0);
+				index = 0;
+				
+				pane = (JScrollPane)tabbedPanUpRight.getComponentAt(index);
+				String nameVFS = tabbedPanUpRight.getTitleAt(index);
+				try {
+					vd = CLUI.getVdACNFromVfsname(nameVFS).getVd();
+					tree = TreeUtil.buildTreeFromVd(vd);
+					revalidate();	
+					repaint();
+				} catch (VirtualDiskDoesntExistException e1) {
+					e1.printStackTrace();
+				} catch (NotInTreeException e2) {
+					e2.printStackTrace();
+				}
+			}
+		}
+
+	}
 }

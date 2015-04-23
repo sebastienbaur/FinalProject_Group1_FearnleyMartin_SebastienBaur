@@ -1,4 +1,4 @@
-package Clients;
+package clients;
 
 import java.awt.*;
 import java.awt.event.*;
