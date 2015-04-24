@@ -80,7 +80,7 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 		this.tree = tree;
 	}
 
-//	private JEditorPane commandLineWriting = new JEditorPane();
+	//	private JEditorPane commandLineWriting = new JEditorPane();
 	//	protected JEditorPane htmlPane = new JEditorPane();
 	private JPanel panLeft = new JPanel();
 	//	private JPanel panUpRight = new JPanel();
@@ -98,6 +98,7 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 	JTextField helpTextField = new JTextField();
 	JTextField loadTextField = new JTextField();
 	JTextField renameVFSTextField = new JTextField();
+	JTextField openTextField = new JTextField();
 
 	private JButton buttonRename = new JButton("Rename");
 	private JButton buttonCopy = new JButton("Copy");
@@ -115,9 +116,10 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 	private JButton buttonSave = new JButton("Save");
 	private JButton buttonCloseTab = new JButton("Close tab without saving");
 	private JButton buttonRenameVFS = new JButton("Rename VFS");
+	private JButton buttonOpen = new JButton("Open");
 
 	public Frame() throws NotInTreeException{
-		this.setResizable(false);
+		this.setResizable(true);
 		this.setSize(1000, 500);
 		JFrame frame = new JFrame();
 		this.setTitle("VFS Management");
@@ -135,7 +137,7 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 		this.getContentPane().add(tabbedPanUpRight, BorderLayout.CENTER);
 		this.getContentPane().add(panDownRight, BorderLayout.SOUTH);
 
-		panLeft.setLayout(new GridLayout(16,2));
+		panLeft.setLayout(new GridLayout(17,2));
 
 		panLeft.add(buttonRename);
 		panLeft.add(renameTextField);
@@ -151,6 +153,8 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 		panLeft.add(findTextField);
 		panLeft.add(buttonLoad);
 		panLeft.add(loadTextField);
+		panLeft.add(buttonOpen);
+		panLeft.add(openTextField);
 		panLeft.add(buttonSave);
 		panLeft.add(new JPanel());
 		panLeft.add(buttonCopy);
@@ -177,7 +181,8 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 		TextPrompt helptp = new TextPrompt("<command>",helpTextField);
 		TextPrompt loadtp = new TextPrompt("<host path>",loadTextField);
 		TextPrompt renamevfs = new TextPrompt("<new name>",renameVFSTextField);
-
+		TextPrompt open = new TextPrompt("<vfsname>",openTextField);
+		TextPrompt help = new TextPrompt("Type the name of a button in the help text field, then click on help to know more about how they work",htmlView);
 
 		//		panUpRight.add(tree);
 		//		tabbedPanUpRight.addTab("vfs1",panUpRight);
@@ -185,8 +190,8 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 		Box b = Box.createVerticalBox();
 		b.setPreferredSize(new Dimension(900,100));
 		Box lineWriting = Box.createHorizontalBox();
-//		lineWriting.add(new JLabel("Write here : "));
-//		lineWriting.add(commandLineWriting);
+		//		lineWriting.add(new JLabel("Write here : "));
+		//		lineWriting.add(commandLineWriting);
 		b.add(lineWriting);
 		Box lineReading = Box.createHorizontalBox();
 		lineReading.add(new JLabel("Console : "));
@@ -215,6 +220,7 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 		buttonSave.addMouseListener(new SaveButtonListener());
 		buttonCloseTab.addMouseListener(new CloseTabButtonListener());
 		buttonRenameVFS.addMouseListener(new RenameVFSButtonListener());
+		buttonOpen.addMouseListener(new OpenButtonListener());
 
 		//		VdAndCurrentNode vdcn = new VdAndCurrentNode(vd);
 		//		VdcnManagement.getVdList().add(vdcn);
@@ -393,19 +399,27 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 				break;
 			case "close tab without saving" :
 				str+="Close the selected tab without saving the current state of the virtual disk \n";
+				break;
 			case "rename":
 				str +="To change the name of a file/directory which is currently selected.\n " ;
 				str +="Syntax: <vfsNewName>\n " ;
 				str +="It will change the older name of the current vfs by vfsNewName. \n";
 				break;
+			case "open":
+				str+="if you already loaded a virtual disk called <vfsname>, and closed its tab, you can load it thanks to the open button.\n";
+				str+="Syntax : type the name of the virtual disk you want to open in the open text field";
+				break;
 			case "load" :
 				str+= "allows you to load a virtual disk the computerpath (absolute or relative) of which is written in the text field next to it \n";
 				str +="Syntax : <computerpath> \n";
+				break;
 			case "save" : 
 				str+= "allows you to save the state of your virtual disk in your computer, at the path its currently lies  \n";
+				break;
 			case "rename vfs" :
 				str+= "allows you to rename the currently selected virtual disk";
 				str+= "Syntax : type the new name of the virtual disk";
+				break;
 			case "copy":
 				str +="To copy, within the VFS named vfsname, the content of a file/directory which is currently selected.\n " ;
 				str +="<targetpath>\n " ;
@@ -414,6 +428,7 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 			case "paste" :
 				str += "After having copied a file/directory, allows you to paste it into the current selected directory \n";
 				str += "Syntax : just copy a first file/directory and then select the place where you want to paste it. Then click on paste.\n";
+				break;
 			case "remove file":
 				str +="To remove a file/directory which is currently selected.\n " ;
 				str +="Syntax: just select the file/directory to be removed and click on the remove file button \n " ;
@@ -456,6 +471,7 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 				break;
 			case "query free space" :
 				str += "Prints the free space of the selected virtual disk";
+				break;
 			default: 
 				str += "";
 			}
@@ -653,7 +669,7 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 		public void mouseReleased(MouseEvent arg0) {
 			// TODO Auto-generated method stub
 			if (treepath != null){
-//				pane.removeAll();
+				//				pane.removeAll();
 				String path = TreeUtil.treePathToString(treepath);
 				try {
 					tempTree = vd.getSubTree(path);
@@ -899,7 +915,7 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 						if (tabbedPanUpRight.getTitleAt(k).equals(splitEnteredText.get(0)))
 							alreadyExistingName = true;
 					}
-					if (!alreadyExistingName){
+					if (!alreadyExistingName && !f.exists()){
 						//						CLUI.crvfs(splitEnteredText.get(0), Integer.valueOf(splitEnteredText.get(1)));
 						//						vd = CLUI.getVdACNFromVfsname(splitEnteredText.get(0)).getVd();
 						vd = VirtualDisk.createVirtualDisk(splitEnteredText.get(0), "virtual disks/"+ splitEnteredText.get(0)+ ".ser", Integer.valueOf(splitEnteredText.get(1)));
@@ -1188,6 +1204,12 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 					if (tabbedPanUpRight.getTitleAt(k).equals(vd1.getName()))
 						alreadyExistingName = true;
 				}
+				for (int k=0;k<VdcnManagement.getVdList().size();k++){
+					if (VdcnManagement.getVdList().get(k).getVd().getName().equals(vd1.getName())){
+						alreadyExistingName = true;
+						htmlView.setText("This virtual disk is already loaded. You can still open it with the OPEN button if its tab is closed.\n");
+					}
+				}
 				if (!alreadyExistingName){
 					vd = VirtualDisk.loadVirtualDisk(enteredPath);
 					VdAndCurrentNode vdcn = new VdAndCurrentNode(vd); // the virtual disk vd should also be added to the list of virtual disks already opened
@@ -1209,7 +1231,7 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 					}
 				}
 				else{
-					htmlView.setText("There is already a VFS called " + vd1.getName() +", please choose another name.");
+					htmlView.append("There is already a VFS called " + vd1.getName() +", please choose another name.");
 				}
 			}
 		}
@@ -1326,6 +1348,7 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 				repaint();
 			}
 			else{
+				index = tabbedPanUpRight.getSelectedIndex();
 				int i = index;
 				tabbedPanUpRight.remove(i);
 				tabbedPanUpRight.setSelectedIndex(0);
@@ -1410,16 +1433,95 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 			}
 
 			//			int i = index;
-//			tree = TreeUtil.buildTreeFromVd(vd);
-//			tree.addTreeSelectionListener(new SelectionListener());
-//			pane = new JScrollPane(tree);
+			//			tree = TreeUtil.buildTreeFromVd(vd);
+			//			tree.addTreeSelectionListener(new SelectionListener());
+			//			pane = new JScrollPane(tree);
 			//			pane.setName(vd.getName());
 			//			tabbedPanUpRight.add(pane, i);
 			//			tabbedPanUpRight.setSelectedIndex(i);
 			//			index = i;
-//			revalidate();	
-//			repaint();
+			//			revalidate();	
+			//			repaint();
+		}
+	}
+
+	public class OpenButtonListener implements MouseListener {
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+
 		}
 
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent arg0) {
+			String enteredText = openTextField.getText();
+
+			try{
+				boolean alreadyOpenedDisk = false;
+				boolean presentInManagementList = false;
+				VirtualDisk vd1 = null;
+				for (int k = 0; k < tabbedPanUpRight.getTabCount(); k++)
+				{
+					if (tabbedPanUpRight.getTitleAt(k).equals(enteredText))
+						alreadyOpenedDisk = true;
+				}
+				for (int k = 0; k < VdcnManagement.getVdList().size();k++){
+					if (VdcnManagement.getVdList().get(k).getVd().getName().equals(enteredText)){
+						presentInManagementList = true;
+						vd1 = VdcnManagement.getVdList().get(k).getVd();
+					}
+				}
+				if (!alreadyOpenedDisk && presentInManagementList){
+					vd = vd1;
+					VdAndCurrentNode vdcn = new VdAndCurrentNode(vd);
+
+					JScrollPane vdContent;
+					tree = TreeUtil.buildTreeFromVd(vd);
+					vdContent= new JScrollPane(tree);
+					tree.addTreeSelectionListener(new SelectionListener());
+					vdContent.setName(enteredText);
+					tabbedPanUpRight.addTab(vd.getName(), vdContent);
+					index = tabbedPanUpRight.indexOfTab(vdContent.getName());
+					pane = (JScrollPane)tabbedPanUpRight.getComponentAt(index);
+					tabbedPanUpRight.setSelectedIndex(index);
+					revalidate();	
+					repaint();
+				}
+				if (!presentInManagementList ){
+					htmlView.setText("This Virtual Disk can't be opened since it's not loaded in the management list");
+				}
+				if(alreadyOpenedDisk) {
+					htmlView.setText("there is already an opened VFS called " + enteredText);
+				}
+
+			} 
+			catch (NotInTreeException e1) {
+				e1.printStackTrace();
+			}
+		}
+
+
 	}
+
+
+
 }
