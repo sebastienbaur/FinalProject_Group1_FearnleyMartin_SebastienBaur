@@ -501,6 +501,8 @@ public class CLUI {
 			strs[i]=strList.get(i);
 		}
 		//check for first argument
+		if (strs.length==0){}
+		else{
 		switch (strs[0]){
 		case "ls":
 			if (strs.length==2){
@@ -615,12 +617,13 @@ public class CLUI {
 //				break;
 		default: System.out.println("Not a valid command, please type help for more information");
 		}
+		}
 	}
 
 	public static void main(String[] args) throws NotInTreeException, VirtualDiskDoesntExistException, NoAvailableSpaceException, NotADirectoryException, ParentException{
 		//create vfs1
 		
-		crvfs("vfs1",1000l);
+//		crvfs("vfs1",100000000l);
 		//create vfs2
 		//		crvfs("vfs2",1000);
 		//		System.out.println(VdcnManagement.getVdList().get(0).getVd());
@@ -630,7 +633,7 @@ public class CLUI {
 		//		VdAndCurrentNode vfs2 = getVdACNFromVfsname("vfs2");
 		//		System.out.println(vfs1.toString());
 		//import level 1
-		impvfs("eval/Host/level 1","vfs1","Home");
+//		impvfs("eval/Host/level 1","vfs1","Home");
 		//		GenerateTree gt = new GenerateTree(getVdACNFromVfsname("vfs1").getVd());
 		//		System.out.println(vfs1.getVd().getTree().getNodeList());
 		//		//navigate to level 2
