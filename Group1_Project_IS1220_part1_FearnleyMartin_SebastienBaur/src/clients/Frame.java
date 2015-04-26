@@ -550,24 +550,24 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 				//				JScrollPane pane = (JScrollPane)tabbedPanUpRight.getComponentAt(index);
 
 
-
+				int i = index;
 				try {
 					pane.removeAll();
 					String parent = TreeUtil.treePathToString(treepath);	
 					String hostpath = importFileStructureTextField.getText();
-					int i = index;
+//					int i = index;
 					tabbedPanUpRight.remove(i);
 					vd.importFileStructure(hostpath, parent);
 					CLUI.getVdACNFromVfsname(vd.getName()).setVd(vd); 
-					tree = TreeUtil.buildTreeFromVd(vd);
-					tree.addTreeSelectionListener(new SelectionListener());
-					pane = new JScrollPane(tree);
-					pane.setName(vd.getName());
-					tabbedPanUpRight.add(pane, i);
-					tabbedPanUpRight.setSelectedIndex(i);
-					index = i;
-					revalidate();	
-					repaint();
+//					tree = TreeUtil.buildTreeFromVd(vd);
+//					tree.addTreeSelectionListener(new SelectionListener());
+//					pane = new JScrollPane(tree);
+//					pane.setName(vd.getName());
+//					tabbedPanUpRight.add(pane, i);
+//					tabbedPanUpRight.setSelectedIndex(i);
+//					index = i;
+//					revalidate();	
+//					repaint();
 				} catch (NoAvailableSpaceException e2) {
 					htmlView.setText("there isn't enough space left on your virtual disk");
 				} catch (NotInTreeException e2) {
@@ -581,7 +581,22 @@ public class Frame extends JFrame implements TreeSelectionListener, ActionListen
 				} catch (VirtualDiskDoesntExistException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}				
+				}
+				finally{
+					try {
+						tree = TreeUtil.buildTreeFromVd(vd);
+					} catch (NotInTreeException e1) {
+						e1.printStackTrace();
+					}
+					tree.addTreeSelectionListener(new SelectionListener());
+					pane = new JScrollPane(tree);
+					pane.setName(vd.getName());
+					tabbedPanUpRight.add(pane, i);
+					tabbedPanUpRight.setSelectedIndex(i);
+					index = i;
+					revalidate();	
+					repaint();
+				}
 
 			}
 			else{
